@@ -1136,7 +1136,8 @@ func (s *ChainService) sendTransaction(tx *wire.MsgTx, options ...QueryOption) e
 		// the other peer must query its own state to determine whether
 		// it should accept the transaction.
 		append(
-			[]QueryOption{Timeout(time.Millisecond * 500)},
+			// TODO(aakselrod): do this more sustainably, but the 500ms timeout isn't enough for wasm
+			[]QueryOption{Timeout(time.Millisecond * 10000)},
 			options...,
 		)...,
 	)
